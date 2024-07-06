@@ -150,8 +150,12 @@ def generate_ipv4(settings):
         clear()
         best_ips = sorted(ip_ping_times, key=ip_ping_times.get)[:settings['show_best_ipv4_count']]
         print(f"\nBest {settings['show_best_ipv4_count']} IPv4 addresses with lowest ping times:")
-        for ip in best_ips:
-            print(f"{ip} - Ping: {ip_ping_times[ip]}ms")
+        with open('Ips.txt', 'w') as file:
+            for ip in best_ips:
+                print(f"{ip} - Ping: {ip_ping_times[ip]}ms")    
+                file.write(f"{ip}\n")
+            file.close()
+        os.system("start Ips.txt")
     else:
         print("No valid IPv4 addresses found.")
 
